@@ -1,16 +1,15 @@
-import { createContext, ReactNode, useContext, useEffect, useState } from "react";
-import tw, { styled } from "twin.macro";
-
-import "twin.macro";
+import {
+  createContext,
+  ReactNode,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
+import cn from "../utils";
 
 interface Props {
   children: ReactNode;
 }
-
-const Wrapper = styled.div<{ isOpen: boolean }>`
-  ${tw`fixed transition-opacity duration-300 ease-in-out bottom-0 right-0 m-4 py-2 px-6 rounded bg-green-700 shadow-2xl max-w-full w-64`}
-  ${({ isOpen }) => (isOpen ? tw`opacity-100` : tw`opacity-0`)}
-`;
 
 const SnackbarContext = createContext({ isOpen: false, handleOpen: () => {} });
 
@@ -45,9 +44,14 @@ const Snackbar = ({ children }: Props) => {
   const { isOpen } = useSnackbar();
 
   return (
-    <Wrapper isOpen={isOpen}>
-      <span tw="text-white">{children}</span>
-    </Wrapper>
+    <div
+      className={cn(
+        "fixed transition-opacity duration-300 ease-in-out bottom-0 right-0 m-4 py-2 px-6 rounded bg-green-700 shadow-2xl max-w-full w-64",
+        isOpen ? "opacity-100" : "opacity-0"
+      )}
+    >
+      <span className="text-white">{children}</span>
+    </div>
   );
 };
 

@@ -5,8 +5,6 @@ import { openDB, DBSchema } from "idb";
 import copy from "clipboard-copy";
 import { Transition } from "@headlessui/react";
 
-import "twin.macro";
-
 import { Snackbar, useSnackbar, Tooltip } from ".";
 import { LinkArrow } from "./svgs";
 
@@ -27,7 +25,7 @@ interface MyDB extends DBSchema {
 const dbName = "users_database";
 
 const listHeading = (
-  <h2 tw="ml-5 uppercase font-semibold tracking-wide text-white">
+  <h2 className="ml-5 uppercase font-semibold tracking-wide text-white">
     List of users
   </h2>
 );
@@ -125,10 +123,10 @@ const Home = () => {
 
   return (
     <>
-      <div tw="min-h-screen flex overflow-hidden bg-gray-100">
+      <div className="min-h-screen flex overflow-hidden bg-gray-100">
         <Transition show={isOpen}>
-          <div tw="md:hidden h-full">
-            <div tw="fixed inset-0 flex z-40">
+          <div className="md:hidden h-full">
+            <div className="fixed inset-0 flex z-40">
               <Transition.Child
                 enter="transition-opacity ease-linear duration-300"
                 enterFrom="opacity-0"
@@ -137,9 +135,9 @@ const Home = () => {
                 leaveFrom="opacity-100"
                 leaveTo="opacity-0"
               >
-                <div tw="fixed inset-0" aria-hidden="true">
+                <div className="fixed inset-0" aria-hidden="true">
                   <div
-                    tw="absolute inset-0 bg-gray-600 opacity-75"
+                    className="absolute inset-0 bg-gray-600 opacity-75"
                     onClick={() => setOpen(false)}
                   />
                 </div>
@@ -152,16 +150,16 @@ const Home = () => {
                 leaveFrom="translate-x-0"
                 leaveTo="-translate-x-full"
               >
-                <div tw="relative flex-1 flex flex-col max-w-xs w-full bg-indigo-700 h-full">
-                  <div tw="absolute top-0 right-0 -mr-12 pt-2">
+                <div className="relative flex-1 flex flex-col max-w-xs w-full bg-indigo-700 h-full">
+                  <div className="absolute top-0 right-0 -mr-12 pt-2">
                     <button
-                      tw="ml-1 flex items-center justify-center h-10 w-10 rounded-full focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+                      className="ml-1 flex items-center justify-center h-10 w-10 rounded-full focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
                       onClick={() => setOpen(false)}
                     >
-                      <span tw="sr-only">Close sidebar</span>
+                      <span className="sr-only">Close sidebar</span>
 
                       <svg
-                        tw="h-6 w-6 text-white"
+                        className="h-6 w-6 text-white"
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
                         viewBox="0 0 24 24"
@@ -177,48 +175,48 @@ const Home = () => {
                       </svg>
                     </button>
                   </div>
-                  <div tw="flex-1 h-0 pt-5 pb-4 overflow-y-auto">
-                    <div tw="flex-shrink-0 flex items-center px-4">
+                  <div className="flex-1 h-0 pt-5 pb-4 overflow-y-auto">
+                    <div className="flex-shrink-0 flex items-center px-4">
                       <img
-                        tw="h-8 w-auto"
+                        className="h-8 w-auto"
                         src="https://tailwindui.com/img/logos/workflow-logo-indigo-300-mark-white-text.svg"
                         alt="Workflow"
                       />
                     </div>
-                    <nav tw="mt-5 px-2 space-y-1">
+                    <nav className="mt-5 px-2 space-y-1">
                       {listHeading}
                       {users.map(({ username }, index) => (
                         <Link
                           to={`/${username}`}
                           key={`${username}-${index}-list`}
-                          tw="text-white hover:bg-indigo-600 hover:bg-opacity-75 flex items-center px-2 py-2 text-base font-medium rounded-md"
+                          className="text-white hover:bg-indigo-600 hover:bg-opacity-75 flex items-center px-2 py-2 text-base font-medium rounded-md"
                         >
-                          <LinkArrow tw="mr-4 h-6 w-6 text-indigo-300" />
+                          <LinkArrow className="mr-4 h-6 w-6 text-indigo-300" />
                           {username}
                         </Link>
                       ))}
                     </nav>
                   </div>
                 </div>
-                <div tw="flex-shrink-0 w-14" aria-hidden="true" />
+                <div className="flex-shrink-0 w-14" aria-hidden="true" />
               </Transition.Child>
             </div>
           </div>
         </Transition>
 
-        <div tw="hidden bg-indigo-700 md:flex md:flex-shrink-0">
-          <div tw="flex flex-col w-64">
-            <div tw="flex flex-col h-0 flex-1">
-              <div tw="flex-1 flex flex-col pt-5 pb-4 overflow-y-auto">
-                <nav tw="mt-5 flex-1 px-2 space-y-1">
+        <div className="hidden bg-indigo-700 md:flex md:flex-shrink-0">
+          <div className="flex flex-col w-64">
+            <div className="flex flex-col h-0 flex-1">
+              <div className="flex-1 flex flex-col pt-5 pb-4 overflow-y-auto">
+                <nav className="mt-5 flex-1 px-2 space-y-1">
                   {listHeading}
                   {users.map(({ username }, index) => (
                     <Link
                       to={`/${username}`}
                       key={`${username}-${index}-list`}
-                      tw="text-white hover:bg-indigo-600 hover:bg-opacity-75 flex items-center px-2 py-2 text-sm font-medium rounded-md"
+                      className="text-white hover:bg-indigo-600 hover:bg-opacity-75 flex items-center px-2 py-2 text-sm font-medium rounded-md"
                     >
-                      <LinkArrow tw="mr-4 h-6 w-6 text-indigo-300" />
+                      <LinkArrow className="mr-4 h-6 w-6 text-indigo-300" />
                       {username}
                     </Link>
                   ))}
@@ -227,16 +225,16 @@ const Home = () => {
             </div>
           </div>
         </div>
-        <div tw="flex flex-col w-0 flex-1 overflow-hidden">
-          <div tw="md:hidden pl-1 pt-1 sm:pl-3 sm:pt-3">
+        <div className="flex flex-col w-0 flex-1 overflow-hidden">
+          <div className="md:hidden pl-1 pt-1 sm:pl-3 sm:pt-3">
             <button
-              tw="-ml-0.5 -mt-0.5 h-12 w-12 inline-flex items-center justify-center rounded-md text-gray-500 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
+              className="-ml-0.5 -mt-0.5 h-12 w-12 inline-flex items-center justify-center rounded-md text-gray-500 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
               onClick={() => setOpen(true)}
             >
-              <span tw="sr-only">Open sidebar</span>
+              <span className="sr-only">Open sidebar</span>
 
               <svg
-                tw="h-6 w-6"
+                className="h-6 w-6"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
@@ -253,41 +251,41 @@ const Home = () => {
             </button>
           </div>
 
-          <main tw="w-full bg-gray-100 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
-            <div tw="sm:mx-auto sm:w-full sm:max-w-md">
-              <h2 tw="text-base text-center text-indigo-600 font-semibold tracking-wide uppercase">
+          <main className="w-full bg-gray-100 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+            <div className="sm:mx-auto sm:w-full sm:max-w-md">
+              <h2 className="text-base text-center text-indigo-600 font-semibold tracking-wide uppercase">
                 XSS example
               </h2>
 
-              <h2 tw="mt-6 text-center text-3xl font-extrabold text-gray-900">
+              <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
                 Create new account
               </h2>
             </div>
 
-            <div tw="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-              <div tw="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-                <form tw="space-y-6" onSubmit={handleSubmit(onSubmit)}>
+            <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+              <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+                <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
                   <div>
                     <label
                       htmlFor="email"
-                      tw="block text-sm font-medium text-gray-700"
+                      className="block text-sm font-medium text-gray-700"
                     >
                       Username
                     </label>
-                    <div tw="mt-1">
+                    <div className="mt-1">
                       <textarea
                         id="username"
                         name="username"
                         ref={register({
                           required: true,
                         })}
-                        tw="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                        className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                       />
                     </div>
-                    <div tw="flex">
+                    <div className="flex">
                       <Tooltip>
                         <button
-                          tw="rounded-full hover:bg-gray-200 p-4"
+                          className="rounded-full hover:bg-gray-200 p-4"
                           type="button"
                           onClick={() => {
                             if (suggestionRef.current) {
@@ -314,7 +312,7 @@ const Home = () => {
                         </button>
                       </Tooltip>
                       <small
-                        tw="ml-3 text-gray-700"
+                        className="ml-3 text-gray-700"
                         ref={suggestionRef}
                       >{`<img onerror='
                   (() => {
@@ -394,17 +392,17 @@ const Home = () => {
                   <div>
                     <label
                       htmlFor="password"
-                      tw="block text-sm font-medium text-gray-700"
+                      className="block text-sm font-medium text-gray-700"
                     >
                       Password
                     </label>
-                    <div tw="mt-1">
+                    <div className="mt-1">
                       <input
                         id="password"
                         name="password"
                         type="password"
                         autoComplete="current-password"
-                        tw="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                        className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                         ref={register({
                           required: true,
                         })}
@@ -415,7 +413,7 @@ const Home = () => {
                   <div>
                     <button
                       type="submit"
-                      tw="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                      className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                     >
                       Continue
                     </button>

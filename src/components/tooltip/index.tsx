@@ -1,92 +1,86 @@
-import { FunctionComponent, useState } from "react";
-import { Manager, Reference, Popper } from "react-popper";
-import {
-  ReferenceBox,
-  PoppersContainer,
-  TransitionedPopperBox,
-  Arrow,
-} from "./styles";
+import React, { useState, FunctionComponent, ReactNode } from 'react';
+import { Manager, Reference, Popper, PopperChildrenProps } from 'react-popper';
+
+import { ReferenceBox } from './ReferenceBox';
+import { PopperBox } from './PopperBox';
+
+interface Props {
+  tooltipNode: ReactNode;
+}
 
 const modifiers = [
   {
-    name: "flip",
+    name: 'flip',
+    enabled: true,
+  },
+  {
+    name: 'hide',
     enabled: false,
   },
   {
-    name: "hide",
-    enabled: false,
-  },
-];
-
-const popperModifiers = [
-  ...modifiers,
-  {
-    name: "arrow",
+    name: 'arrow',
     options: {
       padding: 5,
     },
   },
   {
-    name: "offset",
+    name: 'offset',
     options: {
       offset: [0, 14],
     },
   },
-];
-
-const mainModifiers = [
-  ...popperModifiers,
   // We can't use adaptive styles with CSS transitions
   {
-    name: "computeStyles",
+    name: 'computeStyles',
     options: {
       adaptive: false,
     },
   },
 ];
 
-const Tooltip: FunctionComponent = ({ children }) => {
-  const [appear, setAppear] = useState<boolean>(false);
+const Tooltip: FunctionComponent<Props> = ({ children, tooltipNode }) => {
+  const [open, setOpen] = useState<boolean>(false);
 
-  const onHover = () => setAppear(true);
+  const handleOpen = () => setOpen(true);
 
-  const offHover = () => setAppear(false);
+  const handleClose = () => setOpen(false);
 
   return (
-    <>
-      <Manager>
-        <Reference>
-          {({ ref }) => (
-            <ReferenceBox
-              ref={ref}
-              onMouseEnter={onHover}
-              onMouseLeave={offHover}
-            >
-              {children}
-            </ReferenceBox>
-          )}
-        </Reference>
-        {appear && (
-          <PoppersContainer>
-            <Popper
-              placement="top"
-              modifiers={[...mainModifiers, { name: "flip", enabled: true }]}
-            >
-              {({ ref, style, placement, arrowProps }) => (
-                <TransitionedPopperBox ref={ref} style={style}>
-                  copy
-                  <Arrow
-                    ref={arrowProps.ref}
-                    data-placement={placement}
-                    style={arrowProps.style}
-                  />
-                </TransitionedPopperBox>
-              )}
-            </Popper>
-          </PoppersContainer>
+    <Manager>
+      <Reference>
+        {({ ref }) => (
+          <ReferenceBox
+            ref={ref}
+            onMouseEnter={handleOpen}
+            onMouseLeave={handleClose}
+          >
+            {children}
+          </ReferenceBox>
         )}
-      </Manager>
-    </>
+      </Reference>
+
+      {open && (
+        <div className="popper-container">
+          <Popper placement="top" modifiers={modifiers}>
+            {({ ref, style, placement, arrowProps }: PopperChildrenProps) => (
+              <PopperBox
+                ref={ref}
+                style={style}
+                className="transition-all duration-75 ease-in-out"
+              >
+                {tooltipNode}
+                <div
+                  className="arrow"
+                  ref={arrowProps.ref}
+                  data-placement={placement}
+                  style={arrowProps.style}
+                />
+              </PopperBox>
+            )}
+          </Popper>
+        </div>
+      )}
+    </Manager>
   );
 };
 
