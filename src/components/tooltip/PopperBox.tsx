@@ -26,7 +26,7 @@ const PopperBox: <E extends ElementType = typeof defaultElement>(
   ) => (
     <Component
       className={cn(
-        "flex flex-col justify-center items-center text-white h-0 w-40 p-12 text-center rounded-lg bg-gray-700",
+        "flex flex-col justify-center items-center text-white h-0 w-24 p-8 text-center rounded-lg bg-gray-700",
         className
       )}
       ref={ref}

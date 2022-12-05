@@ -1,8 +1,9 @@
-import React, { useState, FunctionComponent, ReactNode } from 'react';
-import { Manager, Reference, Popper, PopperChildrenProps } from 'react-popper';
+import { useState, FunctionComponent, ReactNode } from "react";
+import { Manager, Reference, Popper, PopperChildrenProps } from "react-popper";
+import { ReferenceBox } from "./ReferenceBox";
+import { PopperBox } from "./PopperBox";
 
-import { ReferenceBox } from './ReferenceBox';
-import { PopperBox } from './PopperBox';
+import styles from "./styles.module.css";
 
 interface Props {
   tooltipNode: ReactNode;
@@ -10,28 +11,28 @@ interface Props {
 
 const modifiers = [
   {
-    name: 'flip',
+    name: "flip",
     enabled: true,
   },
   {
-    name: 'hide',
+    name: "hide",
     enabled: false,
   },
   {
-    name: 'arrow',
+    name: "arrow",
     options: {
       padding: 5,
     },
   },
   {
-    name: 'offset',
+    name: "offset",
     options: {
       offset: [0, 14],
     },
   },
   // We can't use adaptive styles with CSS transitions
   {
-    name: 'computeStyles',
+    name: "computeStyles",
     options: {
       adaptive: false,
     },
@@ -60,7 +61,7 @@ const Tooltip: FunctionComponent<Props> = ({ children, tooltipNode }) => {
       </Reference>
 
       {open && (
-        <div className="popper-container">
+        <div className={styles.container}>
           <Popper placement="top" modifiers={modifiers}>
             {({ ref, style, placement, arrowProps }: PopperChildrenProps) => (
               <PopperBox
@@ -70,7 +71,7 @@ const Tooltip: FunctionComponent<Props> = ({ children, tooltipNode }) => {
               >
                 {tooltipNode}
                 <div
-                  className="arrow"
+                  className={styles.arrow}
                   ref={arrowProps.ref}
                   data-placement={placement}
                   style={arrowProps.style}

@@ -6,10 +6,10 @@ const User = () => {
   const { username } = useParams<{ username: string }>();
 
   return (
-    <main className="max-w-5xl mx-auto mt-20">
+    <main className="max-w-5xl mx-auto mt-20 main">
       <div className="ml-20">
         <Link to="/">
-          <GoBack className="transition transform duration-500 ease-in-out w-10 h-10 p-2 rounded-full outline-none text-green-800 bg-gray-100 hover:(bg-green-900 text-white scale-125) focus:(border-2 border-yellow-500)" />
+          <GoBack className="transition transform duration-500 ease-in-out w-10 h-10 p-2 rounded-full outline-none text-green-800 bg-gray-100 hover:bg-green-900 hover:text-white hover:scale-125 focus:border-2 focus:border-yellow-500" />
         </Link>
       </div>
       <div className="flex">
