@@ -61,7 +61,7 @@ const Tooltip: FunctionComponent<Props> = ({ children, tooltipNode }) => {
       </Reference>
 
       {open && (
-        <div className={styles.container}>
+        <div className={styles.container} role="tooltip">
           <Popper placement="top" modifiers={modifiers}>
             {({ ref, style, placement, arrowProps }: PopperChildrenProps) => (
               <PopperBox

@@ -16,7 +16,6 @@
     "@types/styled-components": "^5.1.7",
     "@vitejs/plugin-react": "^2.2.0",
     "autoprefixer": "^10.4.13",
-    "clipboard-copy": "^4.0.1",
     "idb": "^5.0.8",
     "postcss": "^8.4.19",
     "react": "^18.2.0",

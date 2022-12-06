@@ -14,7 +14,6 @@ specifiers:
   '@types/styled-components': ^5.1.7
   '@vitejs/plugin-react': ^2.2.0
   autoprefixer: ^10.4.13
-  clipboard-copy: ^4.0.1
   idb: ^5.0.8
   postcss: ^8.4.19
   react: ^18.2.0
@@ -41,7 +40,6 @@ dependencies:
   '@types/styled-components': 5.1.26
   '@vitejs/plugin-react': 2.2.0_vite@3.2.5
   autoprefixer: 10.4.13_postcss@8.4.19
-  clipboard-copy: 4.0.1
   idb: 5.0.8
   postcss: 8.4.19
   react: 18.2.0
@@ -827,10 +825,6 @@ packages:
   /ci-info/3.7.0:
     resolution: {integrity: sha512-2CpRNYmImPx+RXKLq6jko/L07phmS9I02TyqkcNU20GCF/GgaWvc58hPtjxDX8lPpkdwc9sNh72V9k00S7ezog==}
     engines: {node: '>=8'}
-    dev: false
-
-  /clipboard-copy/4.0.1:
-    resolution: {integrity: sha512-wOlqdqziE/NNTUJsfSgXmBMIrYmfd5V0HCGsR8uAKHcg+h9NENWINcfRjtWGU77wDHC8B8ijV4hMTGYbrKovng==}
     dev: false
 
   /color-convert/1.9.3:

@@ -2,11 +2,10 @@ import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { openDB, DBSchema } from "idb";
-import copy from "clipboard-copy";
 import { Transition } from "@headlessui/react";
 
 import { Snackbar, useSnackbar, Tooltip } from ".";
-import { LinkArrow } from "./svgs";
+import { DocumentCopy, LinkArrow } from "./svgs";
 
 interface MyDB extends DBSchema {
   users: {
@@ -167,9 +166,9 @@ const Home = () => {
                         aria-hidden="true"
                       >
                         <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
                           d="M6 18L18 6M6 6l12 12"
                         />
                       </svg>
@@ -282,33 +281,21 @@ const Home = () => {
                         className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                       />
                     </div>
-                    <div className="flex items-start">
-                      <Tooltip className="mt-2" tooltipNode="Copy">
+                    <div className="flex">
+                      <Tooltip tooltipNode="Copy">
                         <button
                           className="rounded-full hover:bg-gray-200 p-4"
                           type="button"
-                          onClick={() => {
+                          onClick={async () => {
                             if (suggestionRef.current) {
-                              copy(suggestionRef.current.innerText);
+                              await navigator.clipboard.writeText(
+                                suggestionRef.current.innerText
+                              );
                             }
                             handleOpen();
                           }}
                         >
-                          <svg width="24" height="24">
-                            <rect
-                              width="24"
-                              height="24"
-                              fill="none"
-                              rx="0"
-                              ry="0"
-                            />
-                            <path
-                              fillRule="evenodd"
-                              clipRule="evenodd"
-                              d="M9 2C7.89543 2 7 2.89543 7 4V5H6C4.89543 5 4 5.89543 4 7V20C4 21.1046 4.89543 22 6 22H15C16.1046 22 17 21.1046 17 20V19H18C19.1046 19 20 18.1046 20 17V4C20 2.89543 19.1046 2 18 2H9ZM17 7V17.8H17.8C18.3523 17.8 18.8 17.3523 18.8 16.8V4.2C18.8 3.64772 18.3523 3.2 17.8 3.2H9.2C8.64772 3.2 8.2 3.64771 8.2 4.2V5H15C16.1046 5 17 5.89543 17 7ZM6.2 6.2C5.64772 6.2 5.2 6.64771 5.2 7.2V19.8C5.2 20.3523 5.64771 20.8 6.2 20.8H14.8C15.3523 20.8 15.8 20.3523 15.8 19.8V7.2C15.8 6.64772 15.3523 6.2 14.8 6.2H6.2Z"
-                              fill="gray"
-                            />
-                          </svg>
+                          <DocumentCopy className="h-6 w-6" />
                         </button>
                       </Tooltip>
                       <small

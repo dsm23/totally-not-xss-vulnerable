@@ -3,7 +3,7 @@ import { createRoot } from "react-dom/client";
 import { SnackbarProvider } from "./components";
 import { App } from "./App";
 
-import "tailwindcss/tailwind.css";
+import "./index.css";
 
 createRoot(document.getElementById("root") as HTMLElement).render(
   <StrictMode>
