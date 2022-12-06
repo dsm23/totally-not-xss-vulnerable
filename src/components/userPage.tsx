@@ -24,7 +24,7 @@ const User = () => {
               // __html:
               // '<script defer type="text/javascript">console.log("Hello, World!")</' +
               // "script>",
-              __html: username,
+              __html: username as string,
             }}
           />
           <p className="mt-1">example description</p>
