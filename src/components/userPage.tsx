@@ -6,10 +6,10 @@ const User = () => {
   const { username } = useParams<{ username: string }>();
 
   return (
-    <main className="max-w-5xl mx-auto mt-20 main">
+    <main className="main mx-auto mt-20 max-w-5xl">
       <div className="ml-20">
         <Link to="/">
-          <GoBack className="transition transform duration-500 ease-in-out w-10 h-10 p-2 rounded-full outline-none text-green-800 bg-gray-100 hover:bg-green-900 hover:text-white hover:scale-125 focus:border-2 focus:border-yellow-500" />
+          <GoBack className="h-10 w-10 transform rounded-full bg-gray-100 p-2 text-green-800 outline-none transition duration-500 ease-in-out hover:scale-125 hover:bg-green-900 hover:text-white focus:border-2 focus:border-yellow-500" />
         </Link>
       </div>
       <div className="flex">
@@ -18,7 +18,7 @@ const User = () => {
         </div>
         <div>
           <h1
-            className="text-lg font-bold mt-4"
+            className="mt-4 text-lg font-bold"
             dangerouslySetInnerHTML={{
               // __html: decodeURI(username),
               // __html:

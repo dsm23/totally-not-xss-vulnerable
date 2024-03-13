@@ -11,7 +11,7 @@ createRoot(document.getElementById("root") as HTMLElement).render(
     <SnackbarProvider>
       <App />
     </SnackbarProvider>
-  </StrictMode>
+  </StrictMode>,
 );
 
 reportWebVitals();

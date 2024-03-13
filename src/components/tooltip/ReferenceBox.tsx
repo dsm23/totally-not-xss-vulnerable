@@ -18,21 +18,21 @@ export type Props<E extends ElementType> = PlymorphicProps<E> &
 const defaultElement = "div";
 
 const ReferenceBox: <E extends ElementType = typeof defaultElement>(
-  props: Props<E>
+  props: Props<E>,
 ) => ReactElement | null = forwardRef(
   (
     { as: Component = defaultElement, className, ...props }: PlymorphicProps,
-    ref: Ref<Element>
+    ref: Ref<Element>,
   ) => (
     <Component
       className={cn(
-        "flex flex-col justify-center items-center bg-white text-gray-900 rounded relative h-32 w-24",
-        className
+        "relative flex h-32 w-24 flex-col items-center justify-center rounded bg-white text-gray-900",
+        className,
       )}
       ref={ref}
       {...props}
     />
-  )
+  ),
 );
 
 export { ReferenceBox };

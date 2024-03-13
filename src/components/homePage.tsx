@@ -24,7 +24,7 @@ interface MyDB extends DBSchema {
 const dbName = "users_database";
 
 const listHeading = (
-  <h2 className="ml-5 uppercase font-semibold tracking-wide text-white">
+  <h2 className="ml-5 font-semibold uppercase tracking-wide text-white">
     List of users
   </h2>
 );
@@ -123,10 +123,10 @@ const Home = () => {
 
   return (
     <>
-      <div className="min-h-screen flex overflow-hidden bg-gray-100">
+      <div className="flex min-h-screen overflow-hidden bg-gray-100">
         <Transition show={isOpen}>
-          <div className="md:hidden h-full">
-            <div className="fixed inset-0 flex z-40">
+          <div className="h-full md:hidden">
+            <div className="fixed inset-0 z-40 flex">
               <Transition.Child
                 enter="transition-opacity ease-linear duration-300"
                 enterFrom="opacity-0"
@@ -150,10 +150,10 @@ const Home = () => {
                 leaveFrom="translate-x-0"
                 leaveTo="-translate-x-full"
               >
-                <div className="relative flex-1 flex flex-col max-w-xs w-full bg-indigo-700 h-full">
+                <div className="relative flex h-full w-full max-w-xs flex-1 flex-col bg-indigo-700">
                   <div className="absolute top-0 right-0 -mr-12 pt-2">
                     <button
-                      className="ml-1 flex items-center justify-center h-10 w-10 rounded-full focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+                      className="ml-1 flex h-10 w-10 items-center justify-center rounded-full focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
                       onClick={() => setOpen(false)}
                     >
                       <span className="sr-only">Close sidebar</span>
@@ -175,21 +175,21 @@ const Home = () => {
                       </svg>
                     </button>
                   </div>
-                  <div className="flex-1 h-0 pt-5 pb-4 overflow-y-auto">
-                    <div className="flex-shrink-0 flex items-center px-4">
+                  <div className="h-0 flex-1 overflow-y-auto pt-5 pb-4">
+                    <div className="flex flex-shrink-0 items-center px-4">
                       <img
                         className="h-8 w-auto"
                         src="https://tailwindui.com/img/logos/workflow-logo-indigo-300-mark-white-text.svg"
                         alt="Workflow"
                       />
                     </div>
-                    <nav className="mt-5 px-2 space-y-1">
+                    <nav className="mt-5 space-y-1 px-2">
                       {listHeading}
                       {users.map(({ username }, index) => (
                         <Link
                           to={`/${username}`}
                           key={`${username}-${index}-mobile-list`}
-                          className="text-white hover:bg-indigo-600 hover:bg-opacity-75 flex items-center px-2 py-2 text-base font-medium rounded-md"
+                          className="flex items-center rounded-md px-2 py-2 text-base font-medium text-white hover:bg-indigo-600 hover:bg-opacity-75"
                         >
                           <LinkArrow className="mr-4 h-6 w-6 text-indigo-300" />
                           {username}
@@ -198,23 +198,23 @@ const Home = () => {
                     </nav>
                   </div>
                 </div>
-                <div className="flex-shrink-0 w-14" aria-hidden="true" />
+                <div className="w-14 flex-shrink-0" aria-hidden="true" />
               </Transition.Child>
             </div>
           </div>
         </Transition>
 
         <div className="hidden bg-indigo-700 md:flex md:flex-shrink-0">
-          <div className="flex flex-col w-64">
-            <div className="flex flex-col h-0 flex-1">
-              <div className="flex-1 flex flex-col pt-5 pb-4 overflow-y-auto">
-                <nav className="mt-5 flex-1 px-2 space-y-1">
+          <div className="flex w-64 flex-col">
+            <div className="flex h-0 flex-1 flex-col">
+              <div className="flex flex-1 flex-col overflow-y-auto pt-5 pb-4">
+                <nav className="mt-5 flex-1 space-y-1 px-2">
                   {listHeading}
                   {users.map(({ username }, index) => (
                     <Link
                       to={`/${username}`}
                       key={`${username}-${index}-list`}
-                      className="text-white hover:bg-indigo-600 hover:bg-opacity-75 flex items-center px-2 py-2 text-sm font-medium rounded-md"
+                      className="flex items-center rounded-md px-2 py-2 text-sm font-medium text-white hover:bg-indigo-600 hover:bg-opacity-75"
                     >
                       <LinkArrow className="mr-4 h-6 w-6 text-indigo-300" />
                       {username}
@@ -225,10 +225,10 @@ const Home = () => {
             </div>
           </div>
         </div>
-        <div className="flex flex-col w-0 flex-1 overflow-hidden">
-          <div className="md:hidden pl-1 pt-1 sm:pl-3 sm:pt-3">
+        <div className="flex w-0 flex-1 flex-col overflow-hidden">
+          <div className="pl-1 pt-1 sm:pl-3 sm:pt-3 md:hidden">
             <button
-              className="-ml-0.5 -mt-0.5 h-12 w-12 inline-flex items-center justify-center rounded-md text-gray-500 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
+              className="-ml-0.5 -mt-0.5 inline-flex h-12 w-12 items-center justify-center rounded-md text-gray-500 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
               onClick={() => setOpen(true)}
             >
               <span className="sr-only">Open sidebar</span>
@@ -251,9 +251,9 @@ const Home = () => {
             </button>
           </div>
 
-          <main className="w-full bg-gray-100 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+          <main className="flex w-full flex-col justify-center bg-gray-100 py-12 sm:px-6 lg:px-8">
             <div className="sm:mx-auto sm:w-full sm:max-w-md">
-              <h2 className="text-base text-center text-indigo-600 font-semibold tracking-wide uppercase">
+              <h2 className="text-center text-base font-semibold uppercase tracking-wide text-indigo-600">
                 XSS example
               </h2>
 
@@ -278,18 +278,18 @@ const Home = () => {
                         {...register("username", {
                           required: true,
                         })}
-                        className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                        className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                       />
                     </div>
                     <div className="flex">
                       <Tooltip tooltipNode="Copy">
                         <button
-                          className="rounded-full hover:bg-gray-200 p-4"
+                          className="rounded-full p-4 hover:bg-gray-200"
                           type="button"
                           onClick={async () => {
                             if (suggestionRef.current) {
                               await navigator.clipboard.writeText(
-                                suggestionRef.current.innerText
+                                suggestionRef.current.innerText,
                               );
                             }
                             handleOpen();
@@ -391,7 +391,7 @@ const Home = () => {
                         })}
                         type="password"
                         autoComplete="current-password"
-                        className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                        className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                       />
                     </div>
                   </div>
@@ -399,7 +399,7 @@ const Home = () => {
                   <div>
                     <button
                       type="submit"
-                      className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                      className="flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                     >
                       Continue
                     </button>
