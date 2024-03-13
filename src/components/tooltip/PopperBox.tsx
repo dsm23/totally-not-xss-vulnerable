@@ -18,21 +18,21 @@ export type Props<E extends ElementType> = PlymorphicProps<E> &
 const defaultElement = "div";
 
 const PopperBox: <E extends ElementType = typeof defaultElement>(
-  props: Props<E>
+  props: Props<E>,
 ) => ReactElement | null = forwardRef(
   (
     { as: Component = defaultElement, className, ...props }: PlymorphicProps,
-    ref: Ref<Element>
+    ref: Ref<Element>,
   ) => (
     <Component
       className={cn(
-        "flex flex-col justify-center items-center text-white h-0 w-24 p-8 text-center rounded-lg bg-gray-700",
-        className
+        "flex h-0 w-24 flex-col items-center justify-center rounded-lg bg-gray-700 p-8 text-center text-white",
+        className,
       )}
       ref={ref}
       {...props}
     />
-  )
+  ),
 );
 
 export { PopperBox };

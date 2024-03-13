@@ -1,0 +1,21 @@
+plugins:
+  - prettier-plugin-css-order
+  - prettier-plugin-tailwindcss
+cssDeclarationSorterOrder: smacss
+tailwindConfig: ./tailwind.config.cjs
+tailwindFunctions:
+  - clsx
+  - cn
+  - cva
+  - cx
+overrides:
+  - files:
+      - "*.jsonc"
+      - devcontainer.json
+      - jsconfig.json
+      - language-configuration.json
+      - tsconfig.json
+    options:
+      #  Use one of the following options
+      parser: json
+      trailingComma: none
