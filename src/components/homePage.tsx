@@ -151,7 +151,7 @@ const Home = () => {
                 leaveTo="-translate-x-full"
               >
                 <div className="relative flex h-full w-full max-w-xs flex-1 flex-col bg-indigo-700">
-                  <div className="absolute top-0 right-0 -mr-12 pt-2">
+                  <div className="absolute right-0 top-0 -mr-12 pt-2">
                     <button
                       className="ml-1 flex h-10 w-10 items-center justify-center rounded-full focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
                       onClick={() => setOpen(false)}
@@ -175,7 +175,7 @@ const Home = () => {
                       </svg>
                     </button>
                   </div>
-                  <div className="h-0 flex-1 overflow-y-auto pt-5 pb-4">
+                  <div className="h-0 flex-1 overflow-y-auto pb-4 pt-5">
                     <div className="flex flex-shrink-0 items-center px-4">
                       <img
                         className="h-8 w-auto"
@@ -207,7 +207,7 @@ const Home = () => {
         <div className="hidden bg-indigo-700 md:flex md:flex-shrink-0">
           <div className="flex w-64 flex-col">
             <div className="flex h-0 flex-1 flex-col">
-              <div className="flex flex-1 flex-col overflow-y-auto pt-5 pb-4">
+              <div className="flex flex-1 flex-col overflow-y-auto pb-4 pt-5">
                 <nav className="mt-5 flex-1 space-y-1 px-2">
                   {listHeading}
                   {users.map(({ username }, index) => (
@@ -263,7 +263,7 @@ const Home = () => {
             </div>
 
             <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-              <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+              <div className="bg-white px-4 py-8 shadow sm:rounded-lg sm:px-10">
                 <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
                   <div>
                     <label
@@ -399,7 +399,7 @@ const Home = () => {
                   <div>
                     <button
                       type="submit"
-                      className="flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                      className="flex w-full justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                     >
                       Continue
                     </button>

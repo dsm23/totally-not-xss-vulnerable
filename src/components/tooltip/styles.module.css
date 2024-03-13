@@ -17,7 +17,7 @@
 }
 
 .arrow[data-placement*="bottom"] {
-  @apply top-0 left-0;
+  @apply left-0 top-0;
   margin-top: -0.9em;
 }
 .arrow[data-placement*="bottom"]::before {
