@@ -13,7 +13,7 @@ const User = () => {
         </Link>
       </div>
       <div className="flex">
-        <div className="mt-4 mr-4 flex-shrink-0 self-center">
+        <div className="mr-4 mt-4 flex-shrink-0 self-center">
           <UserSVG className="h-16 w-16 bg-white text-gray-300" />
         </div>
         <div>

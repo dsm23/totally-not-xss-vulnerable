@@ -46,7 +46,7 @@ const Snackbar = ({ children }: Props) => {
   return (
     <div
       className={cn(
-        "fixed bottom-0 right-0 m-4 w-64 max-w-full rounded bg-green-700 py-2 px-6 shadow-2xl transition-opacity duration-300 ease-in-out",
+        "fixed bottom-0 right-0 m-4 w-64 max-w-full rounded bg-green-700 px-6 py-2 shadow-2xl transition-opacity duration-300 ease-in-out",
         isOpen ? "opacity-100" : "opacity-0",
       )}
     >
