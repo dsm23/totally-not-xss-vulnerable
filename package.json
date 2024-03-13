@@ -2,6 +2,7 @@
   "name": "totally-not-xss-vulnerable",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "dependencies": {
     "@headlessui/react": "^1.7.18",
     "@popperjs/core": "^2.11.8",
