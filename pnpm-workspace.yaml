@@ -1,0 +1,10 @@
+allowBuilds:
+  "@swc/core": false
+  esbuild: false
+  lefthook: true
+
+blockExoticSubdeps: true
+
+savePrefix: ""
+
+sideEffectsCache: false
