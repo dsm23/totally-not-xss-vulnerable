@@ -4,32 +4,32 @@
   "private": true,
   "type": "module",
   "dependencies": {
-    "@headlessui/react": "^1.7.18",
-    "@popperjs/core": "^2.11.8",
-    "idb": "^8.0.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-hook-form": "^7.51.0",
-    "react-popper": "^2.3.0",
-    "react-router-dom": "^6.22.3"
+    "@headlessui/react": "1.7.18",
+    "@popperjs/core": "2.11.8",
+    "idb": "8.0.0",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-hook-form": "7.51.0",
+    "react-popper": "2.3.0",
+    "react-router-dom": "6.22.3"
   },
   "devDependencies": {
-    "@types/node": "^20.11.27",
-    "@types/react": "^18.2.65",
-    "@types/react-dom": "^18.2.22",
-    "@types/react-router-dom": "^5.1.6",
-    "@vitejs/plugin-react-swc": "^3.6.0",
-    "autoprefixer": "^10.4.18",
-    "commitizen": "^4.3.0",
-    "cz-conventional-changelog": "^3.3.0",
-    "postcss": "^8.4.35",
-    "prettier": "^3.2.5",
-    "prettier-plugin-css-order": "^2.0.1",
-    "prettier-plugin-tailwindcss": "^0.5.12",
-    "tailwindcss": "^3.4.1",
+    "@types/node": "20.11.27",
+    "@types/react": "18.2.65",
+    "@types/react-dom": "18.2.22",
+    "@types/react-router-dom": "5.1.6",
+    "@vitejs/plugin-react-swc": "3.6.0",
+    "autoprefixer": "10.4.18",
+    "commitizen": "4.3.0",
+    "cz-conventional-changelog": "3.3.0",
+    "postcss": "8.4.35",
+    "prettier": "3.2.5",
+    "prettier-plugin-css-order": "2.0.1",
+    "prettier-plugin-tailwindcss": "0.5.12",
+    "tailwindcss": "3.4.1",
     "typescript": "~5.4.2",
-    "vite": "^5.1.6",
-    "web-vitals": "^3.5.2"
+    "vite": "5.1.6",
+    "web-vitals": "3.5.2"
   },
   "scripts": {
     "dev": "vite",
@@ -38,16 +38,5 @@
     "fmt.check": "prettier --check .",
     "preview": "vite preview"
   },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  }
+  "packageManager": "pnpm@11.5.0+sha512.dbfcc4f81cf48597afd4bc391ffdf12c11f1a9fb83a395bfa6b0a2d9cc2fd8ffebafdb1ccbd529632153f793904c2615b7f09fe1a345473fd1c35845172a8eb1"
 }
