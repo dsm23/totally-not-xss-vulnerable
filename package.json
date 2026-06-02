@@ -25,7 +25,7 @@
     "prettier-plugin-css-order": "2.0.1",
     "prettier-plugin-tailwindcss": "0.5.12",
     "tailwindcss": "3.4.1",
-    "typescript": "~5.4.2",
+    "typescript": "6.0.3",
     "vite": "8.0.16",
     "web-vitals": "3.5.2"
   },
@@ -34,7 +34,8 @@
     "build": "tsc && vite build",
     "fmt": "prettier --write .",
     "fmt.check": "prettier --check .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "check-types": "tsc --noEmit"
   },
   "packageManager": "pnpm@11.5.0+sha512.dbfcc4f81cf48597afd4bc391ffdf12c11f1a9fb83a395bfa6b0a2d9cc2fd8ffebafdb1ccbd529632153f793904c2615b7f09fe1a345473fd1c35845172a8eb1"
 }
