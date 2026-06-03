@@ -1,32 +1,35 @@
-name: build
+name: Build check
+
 on:
+  push:
+    branches:
+      - main
   pull_request:
-    types:
-      - opened
-      - reopened
-      - synchronize
+    branches:
+      - main
+  workflow_dispatch:
+
+env:
+  LEFTHOOK: 0
+
+permissions: {}
+
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      node-version: 26.2.0
     steps:
-      - uses: actions/checkout@v4
+      - name: Harden Runner
+        uses: step-security/harden-runner@9af89fc71515a100421586dfdb3dc9c984fbf411 # v2.19.4
         with:
-          fetch-depth: 0
-      - uses: pnpm/action-setup@v3
+          egress-policy: audit
+
+      - name: Git Checkout
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
-          version: 11
-      - name: Use Node.js ${{ env.node-version }}
-        uses: actions/setup-node@v4
-        with:
-          node-version: ${{ env.node-version }}
-          cache: "pnpm"
-      - name: Install dependencies
-        run: pnpm install
-      # - name: Lint check
-      #   run: pnpm run lint
-      # - name: Unit tests
-      #   run: pnpm run test.unit
-      - name: build check
+          persist-credentials: false
+
+      - name: Node setup
+        uses: ./.github/actions/setup
+
+      - name: Build check
         run: pnpm run build
