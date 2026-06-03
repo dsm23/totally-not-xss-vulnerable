@@ -7,12 +7,12 @@ import {
 } from "react";
 import cn from "../../utils";
 
-export type PlymorphicProps<E extends ElementType = ElementType> = {
+type PlymorphicProps<E extends ElementType = ElementType> = {
   as?: E;
   className?: string;
 };
 
-export type Props<E extends ElementType> = PlymorphicProps<E> &
+type Props<E extends ElementType> = PlymorphicProps<E> &
   Omit<ComponentProps<E>, keyof PlymorphicProps>;
 
 const defaultElement = "div";
