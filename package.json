@@ -26,6 +26,7 @@
     "@types/react": "19.2.16",
     "@types/react-dom": "19.2.3",
     "@vitejs/plugin-react": "6.0.2",
+    "knip": "6.15.0",
     "lefthook": "2.1.9",
     "oxfmt": "0.53.0",
     "tailwindcss": "4.3.0",
@@ -37,6 +38,7 @@
     "build": "react-router typegen && tsc -b && react-router build",
     "fmt": "oxfmt . --write",
     "fmt.check": "oxfmt . --check",
+    "lint": "exit 0",
     "preview": "vite preview",
     "check-types": "react-router typegen && tsc --noEmit"
   },

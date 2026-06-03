@@ -3,8 +3,10 @@ import { useForm } from "react-hook-form";
 import { Link } from "react-router";
 import { Transition, TransitionChild } from "@headlessui/react";
 import { openDB, DBSchema } from "idb";
-import { Snackbar, useSnackbar, Tooltip } from "~/components";
-import { DocumentCopy, LinkArrow } from "~/components/svgs";
+import { Snackbar, useSnackbar } from "~/components/snackbar";
+import { DocumentCopy } from "~/components/svgs/documentCopy";
+import { LinkArrow } from "~/components/svgs/linkArrow";
+import { Tooltip } from "~/components/tooltip";
 
 interface MyDB extends DBSchema {
   users: {
