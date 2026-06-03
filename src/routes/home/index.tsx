@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router";
-import { Transition } from "@headlessui/react";
+import { Transition, TransitionChild } from "@headlessui/react";
 import { openDB, DBSchema } from "idb";
 import { Snackbar, useSnackbar, Tooltip } from "~/components";
 import { DocumentCopy, LinkArrow } from "~/components/svgs";
@@ -126,79 +126,70 @@ const Home = () => {
         <Transition show={isOpen}>
           <div className="h-full md:hidden">
             <div className="fixed inset-0 z-40 flex">
-              <Transition.Child
-                enter="transition-opacity ease-linear duration-300"
-                enterFrom="opacity-0"
-                enterTo="opacity-100"
-                leave="transition-opacity ease-linear duration-300"
-                leaveFrom="opacity-100"
-                leaveTo="opacity-0"
-              >
-                <div className="fixed inset-0" aria-hidden="true">
-                  <div
-                    className="absolute inset-0 bg-gray-600 opacity-75"
-                    onClick={() => setOpen(false)}
-                  />
-                </div>
-              </Transition.Child>
-              <Transition.Child
-                enter="transition ease-in-out duration-300 transform"
-                enterFrom="-translate-x-full"
-                enterTo="translate-x-0"
-                leave="transition ease-in-out duration-300 transform"
-                leaveFrom="translate-x-0"
-                leaveTo="-translate-x-full"
-              >
-                <div className="relative flex h-full w-full max-w-xs flex-1 flex-col bg-indigo-700">
-                  <div className="absolute top-0 right-0 -mr-12 pt-2">
-                    <button
-                      className="ml-1 flex h-10 w-10 items-center justify-center rounded-full focus:ring-2 focus:ring-white focus:outline-hidden focus:ring-inset"
+              <TransitionChild>
+                <div className="transition-opacity duration-300 ease-linear data-enter:opacity-100 data-enter:data-closed:opacity-0 data-leave:opacity-100 data-leave:data-closed:opacity-0">
+                  <div className="fixed inset-0" aria-hidden="true">
+                    <div
+                      className="absolute inset-0 bg-gray-600 opacity-75"
                       onClick={() => setOpen(false)}
-                    >
-                      <span className="sr-only">Close sidebar</span>
-
-                      <svg
-                        className="h-6 w-6 text-white"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        aria-hidden="true"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          d="M6 18L18 6M6 6l12 12"
-                        />
-                      </svg>
-                    </button>
-                  </div>
-                  <div className="h-0 flex-1 overflow-y-auto pt-5 pb-4">
-                    <div className="flex shrink-0 items-center px-4">
-                      <img
-                        className="h-8 w-auto"
-                        src="https://tailwindui.com/img/logos/workflow-logo-indigo-300-mark-white-text.svg"
-                        alt="Workflow"
-                      />
-                    </div>
-                    <nav className="mt-5 space-y-1 px-2">
-                      {listHeading}
-                      {users.map(({ username }, index) => (
-                        <Link
-                          to={`/${username}`}
-                          key={`${username}-${index}-mobile-list`}
-                          className="hover:bg-opacity-75 flex items-center rounded-md px-2 py-2 text-base font-medium text-white hover:bg-indigo-600"
-                        >
-                          <LinkArrow className="mr-4 h-6 w-6 text-indigo-300" />
-                          {username}
-                        </Link>
-                      ))}
-                    </nav>
+                    />
                   </div>
                 </div>
-                <div className="w-14 shrink-0" aria-hidden="true" />
-              </Transition.Child>
+              </TransitionChild>
+              <TransitionChild>
+                <div className="transform transition duration-300 ease-in-out data-enter:translate-x-0 data-enter:data-closed:-translate-x-full data-leave:translate-x-0 data-leave:data-closed:-translate-x-full">
+                  <div className="relative flex h-full w-full max-w-xs flex-1 flex-col bg-indigo-700">
+                    <div className="absolute top-0 right-0 -mr-12 pt-2">
+                      <button
+                        className="ml-1 flex h-10 w-10 items-center justify-center rounded-full focus:ring-2 focus:ring-white focus:outline-hidden focus:ring-inset"
+                        onClick={() => setOpen(false)}
+                      >
+                        <span className="sr-only">Close sidebar</span>
+
+                        <svg
+                          className="h-6 w-6 text-white"
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                          aria-hidden="true"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            d="M6 18L18 6M6 6l12 12"
+                          />
+                        </svg>
+                      </button>
+                    </div>
+                    <div className="h-0 flex-1 overflow-y-auto pt-5 pb-4">
+                      <div className="flex shrink-0 items-center px-4">
+                        <img
+                          className="h-8 w-auto"
+                          // src="https://tailwindplus.com/img/logos/workflow-logo-indigo-300-mark-white-text.svg"
+                          src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=white"
+                          alt="Workflow"
+                        />
+                      </div>
+                      <nav className="mt-5 space-y-1 px-2">
+                        {listHeading}
+                        {users.map(({ username }, index) => (
+                          <Link
+                            to={`/${username}`}
+                            key={`${username}-${index}-mobile-list`}
+                            className="hover:bg-opacity-75 flex items-center rounded-md px-2 py-2 text-base font-medium text-white hover:bg-indigo-600"
+                          >
+                            <LinkArrow className="mr-4 h-6 w-6 text-indigo-300" />
+                            {username}
+                          </Link>
+                        ))}
+                      </nav>
+                    </div>
+                  </div>
+                  <div className="w-14 shrink-0" aria-hidden="true" />
+                </div>
+              </TransitionChild>
             </div>
           </div>
         </Transition>
