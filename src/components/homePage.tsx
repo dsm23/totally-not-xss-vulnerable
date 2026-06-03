@@ -1,9 +1,8 @@
 import { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { openDB, DBSchema } from "idb";
+import { Link } from "react-router-dom";
 import { Transition } from "@headlessui/react";
-
+import { openDB, DBSchema } from "idb";
 import { Snackbar, useSnackbar, Tooltip } from ".";
 import { DocumentCopy, LinkArrow } from "./svgs";
 

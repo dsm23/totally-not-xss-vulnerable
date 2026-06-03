@@ -24,7 +24,7 @@ jobs:
           cache: "pnpm"
       - name: Install dependencies
         run: pnpm install
-      - name: Prettier check
+      - name: Format check
         run: pnpm run fmt.check
       # - name: Lint check
       #   run: pnpm run lint

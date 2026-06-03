@@ -1,7 +1,7 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import { SnackbarProvider } from "./components";
 import App from "./app";
+import { SnackbarProvider } from "./components";
 import reportWebVitals from "./reportWebVitals";
 
 import "./index.css";

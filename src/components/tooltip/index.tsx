@@ -1,7 +1,7 @@
 import { useState, FunctionComponent, ReactNode } from "react";
 import { Manager, Reference, Popper, PopperChildrenProps } from "react-popper";
-import { ReferenceBox } from "./ReferenceBox";
 import { PopperBox } from "./PopperBox";
+import { ReferenceBox } from "./ReferenceBox";
 
 import styles from "./styles.module.css";
 
