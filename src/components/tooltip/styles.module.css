@@ -1,3 +1,5 @@
+@reference "../../index.css";
+
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -13,16 +15,16 @@
 }
 
 .arrow {
-  @apply absolute h-12 w-12;
+  @apply absolute size-12;
 }
 
 .arrow[data-placement*="bottom"] {
-  @apply left-0 top-0;
+  @apply top-0 left-0;
   margin-top: -0.9em;
 }
 .arrow[data-placement*="bottom"]::before {
   border-width: 0 1.5em 1em 1.5em;
-  border-color: transparent transparent theme(colors.gray.700) transparent;
+  border-color: transparent transparent var(--color-gray-700) transparent;
 }
 
 .arrow[data-placement*="top"] {
@@ -31,7 +33,7 @@
 }
 .arrow[data-placement*="top"]::before {
   border-width: 1em 1.5em 0 1.5em;
-  border-color: theme(colors.gray.700) transparent transparent transparent;
+  border-color: var(--color-gray-700) transparent transparent transparent;
 }
 
 .arrow[data-placement*="right"] {
@@ -41,7 +43,7 @@
 
 .arrow[data-placement*="right"]::before {
   border-width: 1.5em 1em 1.5em 0;
-  border-color: transparent theme(colors.gray.700) transparent transparent;
+  border-color: transparent var(--color-gray-700) transparent transparent;
 }
 
 .arrow[data-placement*="left"] {
@@ -50,7 +52,7 @@
 }
 .arrow[data-placement*="left"]::before {
   border-width: 1.5em 0 1.5em 1em;
-  border-color: transparent transparent transparent theme(colors.gray.700);
+  border-color: transparent transparent transparent var(--color-gray-700);
 }
 
 .arrow::before {

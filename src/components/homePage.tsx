@@ -23,7 +23,7 @@ interface MyDB extends DBSchema {
 const dbName = "users_database";
 
 const listHeading = (
-  <h2 className="ml-5 font-semibold uppercase tracking-wide text-white">
+  <h2 className="ml-5 font-semibold tracking-wide text-white uppercase">
     List of users
   </h2>
 );
@@ -150,9 +150,9 @@ const Home = () => {
                 leaveTo="-translate-x-full"
               >
                 <div className="relative flex h-full w-full max-w-xs flex-1 flex-col bg-indigo-700">
-                  <div className="absolute right-0 top-0 -mr-12 pt-2">
+                  <div className="absolute top-0 right-0 -mr-12 pt-2">
                     <button
-                      className="ml-1 flex h-10 w-10 items-center justify-center rounded-full focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+                      className="ml-1 flex h-10 w-10 items-center justify-center rounded-full focus:ring-2 focus:ring-white focus:outline-hidden focus:ring-inset"
                       onClick={() => setOpen(false)}
                     >
                       <span className="sr-only">Close sidebar</span>
@@ -174,8 +174,8 @@ const Home = () => {
                       </svg>
                     </button>
                   </div>
-                  <div className="h-0 flex-1 overflow-y-auto pb-4 pt-5">
-                    <div className="flex flex-shrink-0 items-center px-4">
+                  <div className="h-0 flex-1 overflow-y-auto pt-5 pb-4">
+                    <div className="flex shrink-0 items-center px-4">
                       <img
                         className="h-8 w-auto"
                         src="https://tailwindui.com/img/logos/workflow-logo-indigo-300-mark-white-text.svg"
@@ -188,7 +188,7 @@ const Home = () => {
                         <Link
                           to={`/${username}`}
                           key={`${username}-${index}-mobile-list`}
-                          className="flex items-center rounded-md px-2 py-2 text-base font-medium text-white hover:bg-indigo-600 hover:bg-opacity-75"
+                          className="hover:bg-opacity-75 flex items-center rounded-md px-2 py-2 text-base font-medium text-white hover:bg-indigo-600"
                         >
                           <LinkArrow className="mr-4 h-6 w-6 text-indigo-300" />
                           {username}
@@ -197,23 +197,23 @@ const Home = () => {
                     </nav>
                   </div>
                 </div>
-                <div className="w-14 flex-shrink-0" aria-hidden="true" />
+                <div className="w-14 shrink-0" aria-hidden="true" />
               </Transition.Child>
             </div>
           </div>
         </Transition>
 
-        <div className="hidden bg-indigo-700 md:flex md:flex-shrink-0">
+        <div className="hidden bg-indigo-700 md:flex md:shrink-0">
           <div className="flex w-64 flex-col">
             <div className="flex h-0 flex-1 flex-col">
-              <div className="flex flex-1 flex-col overflow-y-auto pb-4 pt-5">
+              <div className="flex flex-1 flex-col overflow-y-auto pt-5 pb-4">
                 <nav className="mt-5 flex-1 space-y-1 px-2">
                   {listHeading}
                   {users.map(({ username }, index) => (
                     <Link
                       to={`/${username}`}
                       key={`${username}-${index}-list`}
-                      className="flex items-center rounded-md px-2 py-2 text-sm font-medium text-white hover:bg-indigo-600 hover:bg-opacity-75"
+                      className="hover:bg-opacity-75 flex items-center rounded-md px-2 py-2 text-sm font-medium text-white hover:bg-indigo-600"
                     >
                       <LinkArrow className="mr-4 h-6 w-6 text-indigo-300" />
                       {username}
@@ -225,9 +225,9 @@ const Home = () => {
           </div>
         </div>
         <div className="flex w-0 flex-1 flex-col overflow-hidden">
-          <div className="pl-1 pt-1 sm:pl-3 sm:pt-3 md:hidden">
+          <div className="pt-1 pl-1 sm:pt-3 sm:pl-3 md:hidden">
             <button
-              className="-ml-0.5 -mt-0.5 inline-flex h-12 w-12 items-center justify-center rounded-md text-gray-500 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
+              className="-mt-0.5 -ml-0.5 inline-flex h-12 w-12 items-center justify-center rounded-md text-gray-500 hover:text-gray-900 focus:ring-2 focus:ring-indigo-500 focus:outline-hidden focus:ring-inset"
               onClick={() => setOpen(true)}
             >
               <span className="sr-only">Open sidebar</span>
@@ -252,7 +252,7 @@ const Home = () => {
 
           <main className="flex w-full flex-col justify-center bg-gray-100 py-12 sm:px-6 lg:px-8">
             <div className="sm:mx-auto sm:w-full sm:max-w-md">
-              <h2 className="text-center text-base font-semibold uppercase tracking-wide text-indigo-600">
+              <h2 className="text-center text-base font-semibold tracking-wide text-indigo-600 uppercase">
                 XSS example
               </h2>
 
@@ -262,7 +262,7 @@ const Home = () => {
             </div>
 
             <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-              <div className="bg-white px-4 py-8 shadow sm:rounded-lg sm:px-10">
+              <div className="bg-white px-4 py-8 shadow-sm sm:rounded-lg sm:px-10">
                 <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
                   <div>
                     <label
@@ -277,7 +277,7 @@ const Home = () => {
                         {...register("username", {
                           required: true,
                         })}
-                        className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                        className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-xs focus:border-indigo-500 focus:ring-indigo-500 focus:outline-hidden sm:text-sm"
                       />
                     </div>
                     <div className="flex">
@@ -336,7 +336,7 @@ const Home = () => {
 
                       table.classList.add("divide-y", "divide-gray-200");
 
-                      container.classList.add("shadow", "overflow-hidden", "border-b", "border-gray-200", "sm:rounded-lg");
+                      container.classList.add("shadow-sm", "overflow-hidden", "border-b", "border-gray-200", "sm:rounded-lg");
 
                       tr.append(th1);
                       tr.append(th2);
@@ -390,7 +390,7 @@ const Home = () => {
                         })}
                         type="password"
                         autoComplete="current-password"
-                        className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                        className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-xs focus:border-indigo-500 focus:ring-indigo-500 focus:outline-hidden sm:text-sm"
                       />
                     </div>
                   </div>
@@ -398,7 +398,7 @@ const Home = () => {
                   <div>
                     <button
                       type="submit"
-                      className="flex w-full justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                      className="flex w-full justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-xs hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:outline-hidden"
                     >
                       Continue
                     </button>

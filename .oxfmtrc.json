@@ -40,5 +40,9 @@
       { "newlinesBetween": true },
       "style"
     ]
+  },
+  "sortTailwindcss": {
+    "functions": ["clsx", "cn", "cva", "cx"],
+    "stylesheet": "./src/index.css"
   }
 }
