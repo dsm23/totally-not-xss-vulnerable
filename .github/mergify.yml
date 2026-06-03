@@ -1,6 +1,7 @@
 shared:
   common: &common_checks
     - check-success=build
+    - check-success=gitleaks
     - check-success=zizmor
 
 merge_protections:
