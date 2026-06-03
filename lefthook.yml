@@ -1,0 +1,5 @@
+pre-commit:
+  parallel: true
+  commands:
+    oxfmt:
+      run: ./node_modules/.bin/oxfmt --check --no-error-on-unmatched-pattern {staged_files}

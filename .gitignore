@@ -12,6 +12,9 @@ dist
 dist-ssr
 *.local
 
+# lefthook
+lefthook-local.yml
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
