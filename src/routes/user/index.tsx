@@ -1,6 +1,6 @@
 import { Link, useParams } from "react-router";
-import { GoBack } from "./svgs/goBack";
-import { User as UserSVG } from "./svgs/user";
+import { GoBack } from "~/components/svgs/goBack";
+import { User as UserSVG } from "~/components/svgs/user";
 
 const User = () => {
   const { username } = useParams<{ username: string }>();
@@ -34,4 +34,4 @@ const User = () => {
   );
 };
 
-export { User };
+export default User;
