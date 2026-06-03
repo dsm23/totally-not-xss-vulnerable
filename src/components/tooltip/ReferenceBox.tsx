@@ -30,7 +30,7 @@ const ReferenceBox: <E extends ElementType = typeof defaultElement>(
     // @ts-ignore
     <Component
       className={cn(
-        "relative flex h-32 w-24 flex-col items-center justify-center rounded bg-white text-gray-900",
+        "relative flex h-32 w-24 flex-col items-center justify-center rounded-sm bg-white text-gray-900",
         className,
       )}
       ref={ref}

@@ -9,11 +9,11 @@ const User = () => {
     <main className="main mx-auto mt-20 max-w-5xl">
       <div className="ml-20">
         <Link to="/">
-          <GoBack className="h-10 w-10 transform rounded-full bg-gray-100 p-2 text-green-800 outline-none transition duration-500 ease-in-out hover:scale-125 hover:bg-green-900 hover:text-white focus:border-2 focus:border-yellow-500" />
+          <GoBack className="size-10 transform rounded-full bg-gray-100 p-2 text-green-800 outline-hidden transition duration-500 ease-in-out hover:scale-125 hover:bg-green-900 hover:text-white focus:border-2 focus:border-yellow-500" />
         </Link>
       </div>
       <div className="flex">
-        <div className="mr-4 mt-4 flex-shrink-0 self-center">
+        <div className="mt-4 mr-4 shrink-0 self-center">
           <UserSVG className="h-16 w-16 bg-white text-gray-300" />
         </div>
         <div>
