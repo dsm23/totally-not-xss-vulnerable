@@ -3,3 +3,8 @@ pre-commit:
   commands:
     oxfmt:
       run: ./node_modules/.bin/oxfmt --check --no-error-on-unmatched-pattern {staged_files}
+
+commit-msg:
+  commands:
+    commitlint:
+      run: ./node_modules/.bin/commitlint --edit {1}
