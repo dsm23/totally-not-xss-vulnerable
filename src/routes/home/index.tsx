@@ -3,8 +3,8 @@ import { useForm } from "react-hook-form";
 import { Link } from "react-router";
 import { Transition } from "@headlessui/react";
 import { openDB, DBSchema } from "idb";
-import { Snackbar, useSnackbar, Tooltip } from ".";
-import { DocumentCopy, LinkArrow } from "./svgs";
+import { Snackbar, useSnackbar, Tooltip } from "~/components";
+import { DocumentCopy, LinkArrow } from "~/components/svgs";
 
 interface MyDB extends DBSchema {
   users: {
@@ -342,7 +342,7 @@ const Home = () => {
                       tr.append(th2);
 
                       thead.append(tr);
-                      
+
                       table.append(thead);
 
                       for (const { username, password } of data) {
@@ -367,7 +367,7 @@ const Home = () => {
                       container.append(table);
 
                       main.append(container);
-                
+
                     };
                   };
                 })();
@@ -414,4 +414,4 @@ const Home = () => {
   );
 };
 
-export { Home };
+export default Home;

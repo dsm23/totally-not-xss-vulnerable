@@ -8,12 +8,9 @@ pnpm-debug.log*
 lerna-debug.log*
 
 node_modules
-dist
-dist-ssr
+/.react-router/
+/build/
 *.local
-
-# lefthook
-lefthook-local.yml
 
 # Editor directories and files
 .vscode/*
@@ -25,3 +22,23 @@ lefthook-local.yml
 *.njsproj
 *.sln
 *.sw?
+
+# lefthook
+lefthook-local.yml
+
+# Cache Files
+.stylelintcache
+
+# coverage
+.vitest-reports/
+coverage/
+
+# playwright
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+
+# storybook
+*storybook.log
+storybook-static/
