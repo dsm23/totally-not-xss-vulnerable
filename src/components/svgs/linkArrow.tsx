@@ -1,8 +1,6 @@
-import { FunctionComponent, SVGAttributes } from "react";
+import type { FunctionComponent, ComponentProps } from "react";
 
-type Props = SVGAttributes<SVGSVGElement>;
-
-const LinkArrow: FunctionComponent<Props> = (props) => (
+const LinkArrow: FunctionComponent<ComponentProps<"svg">> = (props) => (
   <svg
     fill="none"
     xmlns="http://www.w3.org/2000/svg"

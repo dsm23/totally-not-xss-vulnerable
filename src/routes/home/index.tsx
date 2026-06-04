@@ -2,7 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router";
 import { Transition, TransitionChild } from "@headlessui/react";
-import { openDB, DBSchema } from "idb";
+import { openDB } from "idb";
+import type { DBSchema } from "idb";
 import { CopyIcon } from "lucide-react";
 import { toast } from "sonner";
 import { LinkArrow } from "~/components/svgs/linkArrow";
@@ -39,9 +40,9 @@ const listHeading = (
 
 async function createDatabase() {
   const db = await openDB<MyDB>(dbName, 2, {
-    upgrade(db) {
+    upgrade(currentDB) {
       // Create a store of objects
-      const store = db.createObjectStore("users", {
+      const store = currentDB.createObjectStore("users", {
         // The 'id' property of the object will be the key.
         keyPath: "id",
         // If it isn't explicitly set, create a value by auto incrementing.
@@ -72,9 +73,9 @@ const Home = () => {
   useEffect(() => {
     const doStuff = async () => {
       const db = await createDatabase();
-      const promise = await db.getAll("users");
-      const length = await promise.length;
-      if (length === 0) {
+      const promises = await db.getAll("users");
+
+      if (promises.length === 0) {
         await db.add("users", {
           username: "davidMurdoch",
           password: "hunter2",
@@ -85,23 +86,10 @@ const Home = () => {
         });
       }
 
-      // const tx = db.transaction("users");
-
-      // for await (const cursor of db.transaction("users").store) {
-      //   console.log(cursor.index);
-      //   cursor.continue();
-      // }
-
       setUsers(await db.getAll("users"));
     };
-    doStuff();
-    // return () => {
-    //   const clearIdb = async () => {
-    //     const db = await createDatabase();
-    //     await db.clear();
-    //   };
-    //   clearIdb();
-    // };
+
+    void doStuff();
   }, []);
 
   const { register, handleSubmit, reset } = useForm({
@@ -128,180 +116,185 @@ const Home = () => {
   const [isOpen, setOpen] = useState<boolean>(false);
 
   return (
-    <>
-      <div className="flex min-h-screen overflow-hidden bg-gray-100">
-        <Transition show={isOpen}>
-          <div className="h-full md:hidden">
-            <div className="fixed inset-0 z-40 flex">
-              <TransitionChild>
-                <div className="transition-opacity duration-300 ease-linear data-enter:opacity-100 data-leave:opacity-100 data-enter:data-closed:opacity-0 data-leave:data-closed:opacity-0">
-                  <div className="fixed inset-0" aria-hidden="true">
-                    <div
-                      className="absolute inset-0 bg-gray-600 opacity-75"
-                      onClick={() => setOpen(false)}
-                    />
-                  </div>
+    <div className="flex min-h-screen overflow-hidden bg-gray-100">
+      <Transition show={isOpen}>
+        <div className="h-full md:hidden">
+          <div className="fixed inset-0 z-40 flex">
+            <TransitionChild>
+              <div className="transition-opacity duration-300 ease-linear data-enter:opacity-100 data-leave:opacity-100 data-enter:data-closed:opacity-0 data-leave:data-closed:opacity-0">
+                <div className="fixed inset-0" aria-hidden="true">
+                  <button
+                    className="absolute inset-0 bg-gray-600 opacity-75"
+                    onClick={() => setOpen(false)}
+                    aria-label="Close sidebar"
+                  />
                 </div>
-              </TransitionChild>
-              <TransitionChild>
-                <div className="transform transition duration-300 ease-in-out data-enter:translate-x-0 data-leave:translate-x-0 data-enter:data-closed:-translate-x-full data-leave:data-closed:-translate-x-full">
-                  <div className="relative flex h-full w-full max-w-xs flex-1 flex-col bg-indigo-700">
-                    <div className="absolute top-0 right-0 -mr-12 pt-2">
-                      <button
-                        className="ml-1 flex h-10 w-10 items-center justify-center rounded-full focus:ring-2 focus:ring-white focus:outline-hidden focus:ring-inset"
-                        onClick={() => setOpen(false)}
-                      >
-                        <span className="sr-only">Close sidebar</span>
-
-                        <svg
-                          className="h-6 w-6 text-white"
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                          aria-hidden="true"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="2"
-                            d="M6 18L18 6M6 6l12 12"
-                          />
-                        </svg>
-                      </button>
-                    </div>
-                    <div className="h-0 flex-1 overflow-y-auto pt-5 pb-4">
-                      <div className="flex shrink-0 items-center px-4">
-                        <img
-                          className="h-8 w-auto"
-                          // src="https://tailwindplus.com/img/logos/workflow-logo-indigo-300-mark-white-text.svg"
-                          src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=white"
-                          alt="Workflow"
-                        />
-                      </div>
-                      <nav className="mt-5 space-y-1 px-2">
-                        {listHeading}
-                        {users.map(({ username }, index) => (
-                          <Link
-                            to={`/${username}`}
-                            key={`${username}-${index}-mobile-list`}
-                            className="hover:bg-opacity-75 flex items-center rounded-md px-2 py-2 text-base font-medium text-white hover:bg-indigo-600"
-                          >
-                            <LinkArrow className="mr-4 h-6 w-6 text-indigo-300" />
-                            {username}
-                          </Link>
-                        ))}
-                      </nav>
-                    </div>
-                  </div>
-                  <div className="w-14 shrink-0" aria-hidden="true" />
-                </div>
-              </TransitionChild>
-            </div>
-          </div>
-        </Transition>
-
-        <div className="hidden bg-indigo-700 md:flex md:shrink-0">
-          <div className="flex w-64 flex-col">
-            <div className="flex h-0 flex-1 flex-col">
-              <div className="flex flex-1 flex-col overflow-y-auto pt-5 pb-4">
-                <nav className="mt-5 flex-1 space-y-1 px-2">
-                  {listHeading}
-                  {users.map(({ username }, index) => (
-                    <Link
-                      to={`/${username}`}
-                      key={`${username}-${index}-list`}
-                      className="hover:bg-opacity-75 flex items-center rounded-md px-2 py-2 text-sm font-medium text-white hover:bg-indigo-600"
-                    >
-                      <LinkArrow className="mr-4 h-6 w-6 text-indigo-300" />
-                      {username}
-                    </Link>
-                  ))}
-                </nav>
               </div>
+            </TransitionChild>
+            <TransitionChild>
+              <div className="transform transition duration-300 ease-in-out data-enter:translate-x-0 data-leave:translate-x-0 data-enter:data-closed:-translate-x-full data-leave:data-closed:-translate-x-full">
+                <div className="relative flex size-full max-w-xs flex-1 flex-col bg-indigo-700">
+                  <div className="absolute top-0 right-0 -mr-12 pt-2">
+                    <button
+                      className="ml-1 flex size-10 items-center justify-center rounded-full focus:ring-2 focus:ring-white focus:outline-hidden focus:ring-inset"
+                      onClick={() => setOpen(false)}
+                    >
+                      <span className="sr-only">Close sidebar</span>
+
+                      <svg
+                        className="size-6 text-white"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        aria-hidden="true"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M6 18L18 6M6 6l12 12"
+                        />
+                      </svg>
+                    </button>
+                  </div>
+                  <div className="h-0 flex-1 overflow-y-auto pt-5 pb-4">
+                    <div className="flex shrink-0 items-center px-4">
+                      <img
+                        className="h-8 w-auto"
+                        // src="https://tailwindplus.com/img/logos/workflow-logo-indigo-300-mark-white-text.svg"
+                        src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=white"
+                        alt="Workflow"
+                      />
+                    </div>
+                    <nav className="mt-5 space-y-1 px-2">
+                      {listHeading}
+                      {users.map(({ username }) => (
+                        <Link
+                          to={`/${username}`}
+                          key={`${username}-mobile-list`}
+                          className="flex items-center rounded-md p-2 text-base font-medium text-white hover:bg-indigo-600/75"
+                        >
+                          <LinkArrow className="mr-4 size-6 text-indigo-300" />
+                          {username}
+                        </Link>
+                      ))}
+                    </nav>
+                  </div>
+                </div>
+                <div className="w-14 shrink-0" aria-hidden="true" />
+              </div>
+            </TransitionChild>
+          </div>
+        </div>
+      </Transition>
+
+      <div className="hidden bg-indigo-700 md:flex md:shrink-0">
+        <div className="flex w-64 flex-col">
+          <div className="flex h-0 flex-1 flex-col">
+            <div className="flex flex-1 flex-col overflow-y-auto pt-5 pb-4">
+              <nav className="mt-5 flex-1 space-y-1 px-2">
+                {listHeading}
+                {users.map(({ username }) => (
+                  <Link
+                    to={`/${username}`}
+                    key={`${username}-list`}
+                    className="flex items-center rounded-md p-2 text-sm font-medium text-white hover:bg-indigo-600/75"
+                  >
+                    <LinkArrow className="mr-4 size-6 text-indigo-300" />
+                    {username}
+                  </Link>
+                ))}
+              </nav>
             </div>
           </div>
         </div>
-        <div className="flex w-0 flex-1 flex-col overflow-hidden">
-          <div className="pt-1 pl-1 sm:pt-3 sm:pl-3 md:hidden">
-            <button
-              className="-mt-0.5 -ml-0.5 inline-flex h-12 w-12 items-center justify-center rounded-md text-gray-500 hover:text-gray-900 focus:ring-2 focus:ring-indigo-500 focus:outline-hidden focus:ring-inset"
-              onClick={() => setOpen(true)}
-            >
-              <span className="sr-only">Open sidebar</span>
+      </div>
+      <div className="flex w-0 flex-1 flex-col overflow-hidden">
+        <div className="pt-1 pl-1 sm:pt-3 sm:pl-3 md:hidden">
+          <button
+            className="-mt-0.5 -ml-0.5 inline-flex size-12 items-center justify-center rounded-md text-gray-500 hover:text-gray-900 focus:ring-2 focus:ring-indigo-500 focus:outline-hidden focus:ring-inset"
+            onClick={() => setOpen(true)}
+          >
+            <span className="sr-only">Open sidebar</span>
 
-              <svg
-                className="h-6 w-6"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                aria-hidden="true"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
-              </svg>
-            </button>
+            <svg
+              className="size-6"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M4 6h16M4 12h16M4 18h16"
+              />
+            </svg>
+          </button>
+        </div>
+
+        <main className="flex w-full flex-col justify-center bg-gray-100 py-12 sm:px-6 lg:px-8">
+          <div className="sm:mx-auto sm:w-full sm:max-w-md">
+            <h2 className="text-center text-base font-semibold tracking-wide text-indigo-600 uppercase">
+              XSS example
+            </h2>
+
+            <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
+              Create new account
+            </h2>
           </div>
 
-          <main className="flex w-full flex-col justify-center bg-gray-100 py-12 sm:px-6 lg:px-8">
-            <div className="sm:mx-auto sm:w-full sm:max-w-md">
-              <h2 className="text-center text-base font-semibold tracking-wide text-indigo-600 uppercase">
-                XSS example
-              </h2>
+          <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-xl">
+            <div className="bg-white px-4 py-8 shadow-sm sm:rounded-lg sm:px-10">
+              {/*TODO: fix this*/}
+              {/*oxlint-disable-next-line typescript/strict-void-return */}
+              <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
+                <div className="space-y-4">
+                  <fieldset>
+                    <label
+                      htmlFor="email"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      Username
+                    </label>
+                    <div className="mt-1">
+                      <Textarea
+                        id="username"
+                        {...register("username", {
+                          required: true,
+                        })}
+                      />
+                    </div>
+                  </fieldset>
+                  <div className="flex items-start">
+                    <Tooltip>
+                      <TooltipTrigger
+                        className="rounded-full p-4 hover:bg-gray-200"
+                        // TODO: fix this
+                        // oxlint-disable-next-line typescript/strict-void-return
+                        onClick={async () => {
+                          if (suggestionRef.current) {
+                            await navigator.clipboard.writeText(
+                              suggestionRef.current.innerText,
+                            );
 
-              <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-                Create new account
-              </h2>
-            </div>
-
-            <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-xl">
-              <div className="bg-white px-4 py-8 shadow-sm sm:rounded-lg sm:px-10">
-                <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
-                  <div className="space-y-4">
-                    <fieldset>
-                      <label
-                        htmlFor="email"
-                        className="block text-sm font-medium text-gray-700"
-                      >
-                        Username
-                      </label>
-                      <div className="mt-1">
-                        <Textarea
-                          id="username"
-                          {...register("username", {
-                            required: true,
-                          })}
-                        />
-                      </div>
-                    </fieldset>
-                    <div className="flex items-start">
-                      <Tooltip>
-                        <TooltipTrigger
-                          className="rounded-full p-4 hover:bg-gray-200"
-                          onClick={async () => {
-                            if (suggestionRef.current) {
-                              await navigator.clipboard.writeText(
-                                suggestionRef.current.innerText,
-                              );
-                            }
                             toast("Copied!");
-                          }}
-                        >
-                          <CopyIcon className="size-6" />
-                        </TooltipTrigger>
-                        <TooltipContent>
-                          <p>Copy</p>
-                        </TooltipContent>
-                      </Tooltip>
-                      <small
-                        className="ml-3 text-gray-700"
-                        ref={suggestionRef}
-                      >{`<img onerror='
+                          }
+                        }}
+                      >
+                        <CopyIcon className="size-6" />
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <p>Copy</p>
+                      </TooltipContent>
+                    </Tooltip>
+                    <small
+                      className="ml-3 text-gray-700"
+                      ref={suggestionRef}
+                    >{`<img onerror='
                 (() => {
                   const request = indexedDB.open("users_database", 2);
                   request.onsuccess = function (event) {
@@ -314,7 +307,7 @@ const Home = () => {
 
                       console.log(data, "data");
 
-                      const main = document.querySelector(".main");
+                      const main = document.querySelector("main");
 
                       const tr = document.createElement("tr");
 
@@ -373,40 +366,39 @@ const Home = () => {
                   };
                 })();
               ' src='invalid-image'>`}</small>
-                    </div>
                   </div>
+                </div>
 
-                  <div>
-                    <label
-                      htmlFor="password"
-                      className="block text-sm font-medium text-gray-700"
-                    >
-                      Password
-                    </label>
-                    <div className="mt-1">
-                      <Input
-                        id="password"
-                        {...register("password", {
-                          required: true,
-                        })}
-                        type="password"
-                        autoComplete="current-password"
-                      />
-                    </div>
+                <div>
+                  <label
+                    htmlFor="password"
+                    className="block text-sm font-medium text-gray-700"
+                  >
+                    Password
+                  </label>
+                  <div className="mt-1">
+                    <Input
+                      id="password"
+                      {...register("password", {
+                        required: true,
+                      })}
+                      type="password"
+                      autoComplete="current-password"
+                    />
                   </div>
+                </div>
 
-                  <div>
-                    <Button type="submit" className="w-full px-4 py-2">
-                      Continue
-                    </Button>
-                  </div>
-                </form>
-              </div>
+                <div>
+                  <Button type="submit" className="w-full px-4 py-2">
+                    Continue
+                  </Button>
+                </div>
+              </form>
             </div>
-          </main>
-        </div>
+          </div>
+        </main>
       </div>
-    </>
+    </div>
   );
 };
 

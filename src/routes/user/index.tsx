@@ -6,7 +6,7 @@ const User = () => {
   const { username } = useParams<{ username: string }>();
 
   return (
-    <main className="main mx-auto mt-20 max-w-5xl">
+    <main className="mx-auto mt-20 max-w-5xl">
       <div className="ml-20">
         <Link to="/">
           <GoBack className="size-10 transform rounded-full bg-gray-100 p-2 text-green-800 outline-hidden transition duration-500 ease-in-out hover:scale-125 hover:bg-green-900 hover:text-white focus:border-2 focus:border-yellow-500" />
@@ -19,6 +19,7 @@ const User = () => {
         <div>
           <h1
             className="mt-4 text-lg font-bold"
+            // oxlint-disable-next-line react/no-danger
             dangerouslySetInnerHTML={{
               // __html: decodeURI(username),
               // __html:
