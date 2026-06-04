@@ -3,8 +3,8 @@ import { useForm } from "react-hook-form";
 import { Link } from "react-router";
 import { Transition, TransitionChild } from "@headlessui/react";
 import { openDB, DBSchema } from "idb";
+import { CopyIcon } from "lucide-react";
 import { toast } from "sonner";
-import { DocumentCopy } from "~/components/svgs/documentCopy";
 import { LinkArrow } from "~/components/svgs/linkArrow";
 import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
@@ -292,7 +292,7 @@ const Home = () => {
                             toast("Copied!");
                           }}
                         >
-                          <DocumentCopy className="size-6" />
+                          <CopyIcon className="size-6" />
                         </TooltipTrigger>
                         <TooltipContent>
                           <p>Copy</p>
