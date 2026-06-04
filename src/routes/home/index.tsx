@@ -6,9 +6,13 @@ import { openDB, DBSchema } from "idb";
 import { toast } from "sonner";
 import { DocumentCopy } from "~/components/svgs/documentCopy";
 import { LinkArrow } from "~/components/svgs/linkArrow";
-import { Tooltip } from "~/components/tooltip";
 import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "~/components/ui/tooltip";
 
 interface MyDB extends DBSchema {
   users: {
@@ -254,30 +258,31 @@ const Home = () => {
               </h2>
             </div>
 
-            <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+            <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-xl">
               <div className="bg-white px-4 py-8 shadow-sm sm:rounded-lg sm:px-10">
                 <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
-                  <div>
-                    <label
-                      htmlFor="email"
-                      className="block text-sm font-medium text-gray-700"
-                    >
-                      Username
-                    </label>
-                    <div className="mt-1">
-                      <textarea
-                        id="username"
-                        {...register("username", {
-                          required: true,
-                        })}
-                        className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-xs focus:border-indigo-500 focus:ring-indigo-500 focus:outline-hidden sm:text-sm"
-                      />
-                    </div>
-                    <div className="flex">
-                      <Tooltip tooltipNode="Copy">
-                        <button
+                  <div className="space-y-4">
+                    <fieldset>
+                      <label
+                        htmlFor="email"
+                        className="block text-sm font-medium text-gray-700"
+                      >
+                        Username
+                      </label>
+                      <div className="mt-1">
+                        <textarea
+                          id="username"
+                          {...register("username", {
+                            required: true,
+                          })}
+                          className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-xs focus:border-indigo-500 focus:ring-indigo-500 focus:outline-hidden sm:text-sm"
+                        />
+                      </div>
+                    </fieldset>
+                    <div className="flex items-start">
+                      <Tooltip>
+                        <TooltipTrigger
                           className="rounded-full p-4 hover:bg-gray-200"
-                          type="button"
                           onClick={async () => {
                             if (suggestionRef.current) {
                               await navigator.clipboard.writeText(
@@ -287,8 +292,11 @@ const Home = () => {
                             toast("Copied!");
                           }}
                         >
-                          <DocumentCopy className="h-6 w-6" />
-                        </button>
+                          <DocumentCopy className="size-6" />
+                        </TooltipTrigger>
+                        <TooltipContent>
+                          <p>Copy</p>
+                        </TooltipContent>
                       </Tooltip>
                       <small
                         className="ml-3 text-gray-700"
