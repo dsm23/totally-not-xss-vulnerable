@@ -27,7 +27,7 @@ export function Layout({ children }: { children: ReactNode }) {
         {/*<!-- Icon by <a href='https://iconpacks.net/?utm_source=link-attribution&utm_content=16976'>Iconpacks</a> -->*/}
         <meta
           property="og:image"
-          content="https://totally-not-xss-vulnerable.netlify.app/xss.png"
+          content="https://totally-not-xss-vulnerable.davidmurdoch.site/xss.png"
         />
         <meta property="og:image:type" content="image/png" />
         <meta
