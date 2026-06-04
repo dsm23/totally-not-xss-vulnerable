@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { Link } from "react-router";
 import { Transition, TransitionChild } from "@headlessui/react";
 import { openDB, DBSchema } from "idb";
-import { Snackbar, useSnackbar } from "~/components/snackbar";
+import { toast } from "sonner";
 import { DocumentCopy } from "~/components/svgs/documentCopy";
 import { LinkArrow } from "~/components/svgs/linkArrow";
 import { Tooltip } from "~/components/tooltip";
@@ -117,8 +117,6 @@ const Home = () => {
       keepSubmitCount: false,
     });
   };
-
-  const { handleOpen } = useSnackbar();
 
   const suggestionRef = useRef<HTMLElement>(null);
 
@@ -286,7 +284,7 @@ const Home = () => {
                                 suggestionRef.current.innerText,
                               );
                             }
-                            handleOpen();
+                            toast("Copied!");
                           }}
                         >
                           <DocumentCopy className="h-6 w-6" />
@@ -400,7 +398,6 @@ const Home = () => {
           </main>
         </div>
       </div>
-      <Snackbar>Copied!</Snackbar>
     </>
   );
 };

@@ -1,12 +1,13 @@
 import { Outlet } from "react-router";
-import { SnackbarProvider } from "~/components/snackbar";
+import { Toaster } from "~/components/ui/sonner";
 
 import "~/index.css";
 
 const Layout = () => (
-  <SnackbarProvider>
+  <>
     <Outlet />
-  </SnackbarProvider>
+    <Toaster />
+  </>
 );
 
 export default Layout;
