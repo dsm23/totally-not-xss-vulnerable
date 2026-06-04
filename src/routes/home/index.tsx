@@ -8,6 +8,7 @@ import { DocumentCopy } from "~/components/svgs/documentCopy";
 import { LinkArrow } from "~/components/svgs/linkArrow";
 import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
+import { Textarea } from "~/components/ui/textarea";
 import {
   Tooltip,
   TooltipContent,
@@ -270,12 +271,11 @@ const Home = () => {
                         Username
                       </label>
                       <div className="mt-1">
-                        <textarea
+                        <Textarea
                           id="username"
                           {...register("username", {
                             required: true,
                           })}
-                          className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-xs focus:border-indigo-500 focus:ring-indigo-500 focus:outline-hidden sm:text-sm"
                         />
                       </div>
                     </fieldset>
