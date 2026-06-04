@@ -1,6 +1,6 @@
 import { Link, useParams } from "react-router";
+import { UserRoundIcon } from "lucide-react";
 import { GoBack } from "~/components/svgs/goBack";
-import { User as UserSVG } from "~/components/svgs/user";
 
 const User = () => {
   const { username } = useParams<{ username: string }>();
@@ -14,7 +14,7 @@ const User = () => {
       </div>
       <div className="flex">
         <div className="mt-4 mr-4 shrink-0 self-center">
-          <UserSVG className="h-16 w-16 bg-white text-gray-300" />
+          <UserRoundIcon className="size-16 text-green-800" />
         </div>
         <div>
           <h1
