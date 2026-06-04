@@ -4,7 +4,7 @@ import { Link } from "react-router";
 import { Transition, TransitionChild } from "@headlessui/react";
 import { openDB } from "idb";
 import type { DBSchema } from "idb";
-import { CopyIcon } from "lucide-react";
+import { CopyIcon, MenuIcon, XIcon } from "lucide-react";
 import { toast } from "sonner";
 import { LinkArrow } from "~/components/svgs/linkArrow";
 import { Button } from "~/components/ui/button";
@@ -141,21 +141,7 @@ const Home = () => {
                     >
                       <span className="sr-only">Close sidebar</span>
 
-                      <svg
-                        className="size-6 text-white"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        aria-hidden="true"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          d="M6 18L18 6M6 6l12 12"
-                        />
-                      </svg>
+                      <XIcon className="size-6 text-white" />
                     </button>
                   </div>
                   <div className="h-0 flex-1 overflow-y-auto pt-5 pb-4">
@@ -218,21 +204,7 @@ const Home = () => {
           >
             <span className="sr-only">Open sidebar</span>
 
-            <svg
-              className="size-6"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              aria-hidden="true"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M4 6h16M4 12h16M4 18h16"
-              />
-            </svg>
+            <MenuIcon className="size-6" />
           </button>
         </div>
 
