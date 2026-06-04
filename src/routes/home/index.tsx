@@ -7,6 +7,8 @@ import { Snackbar, useSnackbar } from "~/components/snackbar";
 import { DocumentCopy } from "~/components/svgs/documentCopy";
 import { LinkArrow } from "~/components/svgs/linkArrow";
 import { Tooltip } from "~/components/tooltip";
+import { Button } from "~/components/ui/button";
+import { Input } from "~/components/ui/input";
 
 interface MyDB extends DBSchema {
   users: {
@@ -129,7 +131,7 @@ const Home = () => {
           <div className="h-full md:hidden">
             <div className="fixed inset-0 z-40 flex">
               <TransitionChild>
-                <div className="transition-opacity duration-300 ease-linear data-enter:opacity-100 data-enter:data-closed:opacity-0 data-leave:opacity-100 data-leave:data-closed:opacity-0">
+                <div className="transition-opacity duration-300 ease-linear data-enter:opacity-100 data-leave:opacity-100 data-enter:data-closed:opacity-0 data-leave:data-closed:opacity-0">
                   <div className="fixed inset-0" aria-hidden="true">
                     <div
                       className="absolute inset-0 bg-gray-600 opacity-75"
@@ -139,7 +141,7 @@ const Home = () => {
                 </div>
               </TransitionChild>
               <TransitionChild>
-                <div className="transform transition duration-300 ease-in-out data-enter:translate-x-0 data-enter:data-closed:-translate-x-full data-leave:translate-x-0 data-leave:data-closed:-translate-x-full">
+                <div className="transform transition duration-300 ease-in-out data-enter:translate-x-0 data-leave:translate-x-0 data-enter:data-closed:-translate-x-full data-leave:data-closed:-translate-x-full">
                   <div className="relative flex h-full w-full max-w-xs flex-1 flex-col bg-indigo-700">
                     <div className="absolute top-0 right-0 -mr-12 pt-2">
                       <button
@@ -376,25 +378,21 @@ const Home = () => {
                       Password
                     </label>
                     <div className="mt-1">
-                      <input
+                      <Input
                         id="password"
                         {...register("password", {
                           required: true,
                         })}
                         type="password"
                         autoComplete="current-password"
-                        className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-xs focus:border-indigo-500 focus:ring-indigo-500 focus:outline-hidden sm:text-sm"
                       />
                     </div>
                   </div>
 
                   <div>
-                    <button
-                      type="submit"
-                      className="flex w-full justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-xs hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:outline-hidden"
-                    >
+                    <Button type="submit" className="w-full px-4 py-2">
                       Continue
-                    </button>
+                    </Button>
                   </div>
                 </form>
               </div>
